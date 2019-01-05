@@ -1,13 +1,23 @@
 {
-  "name": "react-basic-starter",
+  "name": "spago-react-basic-starter",
   "version": "1.0.0",
   "description": "An example react-basic project",
-  "repository": "lumihq/react-basic-starter",
+  "repository": "alex-ketch/spago-react-basic-starter",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf dist/*",
+    "dev": "spago build && parcel src/index.html",
+    "spago:build": "spago build",
+    "spago:make-module": "spago make-module --main Main --to output/Main/index.js",
+    "bundle": "npm run clean && npm run spago:build && npm run spago:make-module",
+    "build": "npm run bundle && parcel build src/index.html"
+  },
   "dependencies": {
-    "react": "16.6.1",
-    "react-dom": "16.6.1"
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.10.3"
+    "parcel-bundler": "^1.10.3",
+    "rimraf": "^2.6.3"
   }
 }

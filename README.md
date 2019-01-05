@@ -1,19 +1,53 @@
-# react-basic-starter (Spacchetti fork)
+# react-basic-starter (Spago fork)
 
-[![Build Status](https://travis-ci.org/justinwoo/spacchetti-react-basic-starter.svg?branch=master)](https://travis-ci.org/justinwoo/spacchetti-react-basic-starter)
+This is a fork of
+[justinwoo/spacchetti-react-basic-starter](https://github.com/justinwoo/spacchetti-react-basic-starter),
+which is in turn a fork of [LumiHQ/React-Basic-Starter](https://github.com/lumihq/react-basic-starter).
 
-This is a fork of the LumiHQ/React-Basic-Starter repo from here: <https://github.com/lumihq/react-basic-starter>
+## Requirements
 
-This fork has differences from the original:
+- [Purescript](http://www.purescript.org): A strongly-typed functional programming language that compiles to JavaScript
+- [Spago](https://github.com/spacchetti/spago): PureScript package manager and build tool
 
-* Parcel to build the application and provide automatic hot reloading of React components
-* Psc-Package for dependency management, with Spacchetti package sets <https://github.com/justinwoo/spacchetti>
-* (Optionally) Easy-PureScript-Nix to manage required tooling <https://github.com/justinwoo/easy-purescript-nix>
-* (Optionally) PscPackage2Nix to nix-ify the psc-package dependencies <https://github.com/justinwoo/psc-package2nix>
-* consumes the output modules from the PureScript compiler output directly (see src/index.html, src/index.js)
+## Quickstart
 
-Video of hot reloading in action: <https://twitter.com/jusrin00/status/1060961458484326400>
+```sh
+git clone git@github.com:alex-ketch/spago-react-basic-starter.git
+cd spago-react-basic-starter
+spago install
+npm install
+npm run dev
+```
 
-More information about how this setup works is available here: <https://qiita.com/kimagure/items/aec640d0047d08d2ce90>
+## Development
 
-This repo is representative of how a normal PureScript project would be set up, but you can skip the [Nix](https://nixos.org/nix/) package manager and the Makefile if you prefer not to use them.
+```sh
+npm run dev
+```
+
+This will run Parcel in watch mode, and provides Hot-Reloading for the app
+whenever the PureScript sources change. However you still have to build the
+PureScript sources by yourself, either through the [IDE PureScript plugin](https://github.com/nwolverson/atom-ide-purescript)
+or running `spago build` after making and saving your changes.
+
+## Production Build
+
+This will use [Parcel](https://parceljs.org) to output an optimized files to the `/dist` directory.
+
+```sh
+npm run build
+```
+
+## Compatability with [IDE PureScript plugin](https://github.com/nwolverson/atom-ide-purescript)
+
+As outlined in [this Spago issue](https://github.com/spacchetti/spago/issues/63#issuecomment-450750868),
+IDE Purescript plugin by default expects packages to be installed by Bower os
+psc-package.
+
+For full compatibility, including auto-building your project, please update
+the IDE Purescript plugin settings to:
+
+```json
+"purescript.buildCommand": "spago build -- --json-errors",
+"purescript.packagePath": ".spago/*/*/src/**/*.purs"
+```
